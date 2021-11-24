@@ -48,6 +48,18 @@ public class ProductEntity extends BaseEntity{
 	
 	@Column(name = "wanrranty")
 	private Integer wanrranty;
+	
+	@OneToMany(mappedBy = "product")
+	private List<CartDetailEntity> cartDetail = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "productOrder")
+	private List<OrderDetailEntity> orderDetail = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "product")
+	private List<CommentEntity> comment = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "product")
+	private List<RateEntity> rate = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -136,6 +148,39 @@ public class ProductEntity extends BaseEntity{
 	public void setCategories(CategoryEntity categories) {
 		this.categories = categories;
 	}
+
+	public List<CartDetailEntity> getCartDetail() {
+		return cartDetail;
+	}
+
+	public void setCartDetail(List<CartDetailEntity> cartDetail) {
+		this.cartDetail = cartDetail;
+	}
+
+	public List<OrderDetailEntity> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(List<OrderDetailEntity> orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
+	public List<CommentEntity> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<CommentEntity> comment) {
+		this.comment = comment;
+	}
+
+	public List<RateEntity> getRate() {
+		return rate;
+	}
+
+	public void setRate(List<RateEntity> rate) {
+		this.rate = rate;
+	}
+	
 	
 	
 }

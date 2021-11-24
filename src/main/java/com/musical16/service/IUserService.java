@@ -2,19 +2,21 @@ package com.musical16.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.musical16.dto.ForgotPasswordDTO;
-import com.musical16.dto.MessageDTO;
-import com.musical16.dto.RegisterDTO;
-import com.musical16.dto.UpdateUserInfoDTO;
-import com.musical16.dto.UserDTO;
+import com.musical16.dto.request.ChangePassword;
+import com.musical16.dto.request.ForgotPasswordDTO;
+import com.musical16.dto.request.RegisterDTO;
+import com.musical16.dto.request.UpdateUserInfoDTO;
+import com.musical16.dto.response.MessageDTO;
+import com.musical16.dto.response.UserDTO;
 
 public interface IUserService {
 
     public UserDTO findOne(String username);
 	
-	public MessageDTO save(RegisterDTO user, HttpServletRequest req) throws Exception;
+	public ResponseEntity<?> save(RegisterDTO user, HttpServletRequest req) throws Exception;
 	
 	public String activation(String token);
 	
@@ -27,4 +29,7 @@ public interface IUserService {
 	public MessageDTO save(UpdateUserInfoDTO user, HttpServletRequest req) throws Exception;
 
 	public MessageDTO uploadImage(MultipartFile file, HttpServletRequest req);
+
+	public MessageDTO changePassword(ChangePassword user, HttpServletRequest req);
+	
 }

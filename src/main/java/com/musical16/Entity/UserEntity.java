@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -28,6 +30,9 @@ public class UserEntity extends BaseEntity {
 	
 	@Column(name = "status")
 	private Integer status;
+	
+	@Column(name = "sex")
+	private Integer sex;
 	
 	@Column(name = "email", unique = true)
 	private String email;
@@ -53,6 +58,24 @@ public class UserEntity extends BaseEntity {
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	
 	private List<RoleEntity> roles = new ArrayList<>();
+	
+	@OneToOne(mappedBy = "user")
+    private CartEntity cart;
+	
+	@OneToMany(mappedBy = "user")
+	private List<OrdersEntity> order = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<CommentEntity> comment = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<CommentReplyEntity> commentReply = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<RateEntity> rate = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<RateReplyEntity> rateReply = new ArrayList<>();
 
 	public String getUserName() {
 		return userName;
@@ -142,6 +165,65 @@ public class UserEntity extends BaseEntity {
 		this.url = url;
 	}
 
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public CartEntity getCart() {
+		return cart;
+	}
+
+	public void setCart(CartEntity cart) {
+		this.cart = cart;
+	}
+
+	public List<OrdersEntity> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<OrdersEntity> order) {
+		this.order = order;
+	}
+
+	public List<CommentEntity> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<CommentEntity> comment) {
+		this.comment = comment;
+	}
+
+	public List<CommentReplyEntity> getCommentReply() {
+		return commentReply;
+	}
+
+	public void setCommentReply(List<CommentReplyEntity> commentReply) {
+		this.commentReply = commentReply;
+	}
+
+	public List<RateEntity> getRate() {
+		return rate;
+	}
+
+	public void setRate(List<RateEntity> rate) {
+		this.rate = rate;
+	}
+
+	public List<RateReplyEntity> getRateReply() {
+		return rateReply;
+	}
+
+	public void setRateReply(List<RateReplyEntity> rateReply) {
+		this.rateReply = rateReply;
+	}
+
+	
+	
+	
 	
 	
 	
