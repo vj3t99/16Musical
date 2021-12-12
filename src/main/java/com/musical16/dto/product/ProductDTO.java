@@ -30,7 +30,7 @@ public class ProductDTO extends BaseDTO{
 	
 	private Integer wanrranty;
 	
-	private String message;
+	private Double rate;
 
 	public String getName() {
 		return name;
@@ -121,12 +121,12 @@ public class ProductDTO extends BaseDTO{
 		this.wanrranty = wanrranty;
 	}
 
-	public String getMessage() {
-		return message;
+	public Double getRate() {
+		return rate;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setRate(Double rate) {
+		this.rate = rate;
 	}
 	
 	

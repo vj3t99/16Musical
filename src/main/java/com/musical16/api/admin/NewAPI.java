@@ -1,10 +1,11 @@
 package com.musical16.api.admin;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.musical16.dto.news.NewDTO;
+import com.musical16.dto.request.InputNew;
 import com.musical16.dto.response.MessageDTO;
+import com.musical16.dto.response.Page;
 import com.musical16.service.INewService;
 
 @RestController
@@ -27,8 +30,9 @@ public class NewAPI {
 	private INewService newService;
 	
 	@GetMapping("/new")
-	public List<NewDTO> findAll(){
-		return newService.findAll();
+	public Page<NewDTO> findAll(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value= "sort", required = false ) String[] sort, 
+			@RequestParam(value = "category", required = false) Long id){
+		return newService.findAll(page, sort, id);
 	}
 	
 	@GetMapping("/new/{id}")
@@ -38,8 +42,8 @@ public class NewAPI {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/new")
-	public MessageDTO save(@RequestBody NewDTO newDTO, HttpServletRequest req) {
-		return newService.save(newDTO, req);
+	public ResponseEntity<?> save(@Valid @RequestBody InputNew input, HttpServletRequest req) {
+		return newService.save(input, req);
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
@@ -50,7 +54,7 @@ public class NewAPI {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/new/{id}")
-	public MessageDTO delele(@PathVariable("id") Long id) {
+	public ResponseEntity<?> delele(@PathVariable("id") Long id) {
 		return newService.delete(id);
 	}
 }
